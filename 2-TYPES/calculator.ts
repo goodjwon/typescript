@@ -10,23 +10,18 @@ console.log(calculate('remainder', 5, 2)); // 1
 type operation = 'add' | 'substract' | 'multiply' | 'divide' | 'remainder' ;
 
 function calculate(oper: operation, num1:number, num2:number) : number {
-    let result = 0;
-
-    if('add' === oper){
-        result = num1 + num2;
-    } else if ('substract' === oper){
-        result = num1 - num2;
-    } else if ('multiply' === oper ){
-        result = num1 * num2;
-    } else if ('divide' === oper) {
-        result = num1/ num2;
-    } else if ('remainder' === oper){
-        result = num1 % num2;
-    } else {
-        result = 0;
+    switch(oper){
+        case 'add':
+            return num1 + num2;
+        case 'substract' :
+            return num1 - num2;
+        case 'multiply' :
+            return num1 * num2;
+        case 'divide' :
+            return num1 / num2;
+        case 'remainder' :
+            return num1 % num2;
+        default:
+            throw Error('unknown command');
     }
-    
-
-    return result;
-
 }
