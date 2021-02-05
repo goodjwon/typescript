@@ -40,5 +40,37 @@
     // CoffeeMaker.BEANS_GRAMM_PER_SHOT 직접접근=> privatge 로 해결
     maker.fillCoffeeBeans(5);
     console.log(maker);
-    console.log(maker.makeCoffee(3))
+    console.log(maker.makeCoffee(3));
+
+
+    class User {
+        private internalAge =4;
+
+        constructor(private firstName: string, private lastName: string){
+            this.firstName = firstName;
+            this.lastName = lastName;
+        }
+        get fullName(): string{
+            return `${this.firstName} ${this.lastName}`;
+        }
+
+        get age(){
+            return this.internalAge;
+        }
+
+        set age(num:number){
+            if(num < 0) {
+                throw new Error('age should not be greater than 0');
+            }
+            this.internalAge = num;
+        }
+
+
+    }
+
+    const user = new User('goodjwon', 'park');
+    user.age = 1;
+    console.log(user.fullName);
+    console.log(user.age);
+
 }
