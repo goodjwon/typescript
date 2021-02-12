@@ -62,7 +62,16 @@
         }
     }
 
-    class CeapMilkSteamer {
+
+    interface MilkFrother{
+        makeMilk(cup: CoffeeCup): CoffeeCup
+    }
+
+    interface SugarProvider{
+        addSuger(cup: CoffeeCup): CoffeeCup
+    }
+
+    class CeapMilkSteamer implements MilkFrother {
         private steamMilk(): void {
             console.log('Steaming some milk... 🥛')
         }
@@ -76,7 +85,7 @@
         }
     }
 
-    class SugarMixer {
+    class SugarMixer implements SugarProvider {
         private getSuger() {
             console.log('Getting soum sugar from candy 🍭');
             return true
@@ -93,7 +102,7 @@
 
     class CaffeLatteMachine extends CoffeeMachine {
         constructor(beans: number,
-            private milkFother: CeapMilkSteamer) {
+            private milkFother: MilkFrother) {
             super(beans);
         }
         makeCoffee(shots: number): CoffeeCup {
@@ -108,7 +117,7 @@
 
     class SwiteCoffeeMaker extends CoffeeMachine {
         constructor(private beans: number,
-            private sugar: SugarMixer) {
+            private sugar: SugarProvider) {
             super(beans)
         }
 
@@ -122,8 +131,8 @@
     class SwiteCoffeeLattemachine extends CoffeeMachine {
         constructor(
             private beans: number, 
-            private sugar: SugarMixer, 
-            private milk: CeapMilkSteamer){
+            private sugar: SugarProvider, 
+            private milk: MilkFrother){
                 super(beans)
             }
         
@@ -144,7 +153,8 @@
         new SwiteCoffeeMaker(16,candySuger),
         new CoffeeMachine(16),
         new CaffeLatteMachine(16,cheapMilkMaker ),
-        new SwiteCoffeeMaker(16, candySuger)
+        new SwiteCoffeeMaker(16, candySuger),
+        new SwiteCoffeeLattemachine(16, candySuger, cheapMilkMaker  )
     ];
 
     machines.forEach(machine => {
