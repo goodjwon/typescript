@@ -10,7 +10,7 @@
     }
 
     class SingleQueue implements Queue {
-        private _size: number;
+        private _size: number = 0;
         private head?: QueueNode;
         private tail?: QueueNode;
 
@@ -18,30 +18,33 @@
             return this._size;
         }
 
-
         push(value: string): void {
-            const head:  QueueNode = {value, next:this.head}
-            this.head = head;
+            const node:  QueueNode = {value, next:this.head}
+            this.head = node;
             this._size++;
         }
+
         pop(): string {
-            const tail: this.head;
+            const tempNode: QueueNode = this.head;
+            this.head = this.head?.next;
+
+            if(this.head == null){
+                this.tail = undefined;
+            }
+
             this._size--;
 
-            return tail.value;
+            return this.head?.value;
         }
         
     }
-
 
     const sq = new SingleQueue();
     sq.push('A1');
     sq.push('A2');
     sq.push('A3');
 
-    console.log(sq);
-
-    while(sq.size === 0){
+    while(sq.size !== 0){
         console.log(sq.pop());
     }
 

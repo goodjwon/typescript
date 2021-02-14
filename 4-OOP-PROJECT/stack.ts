@@ -13,11 +13,17 @@
     class SingleStack implements Stack {
         private _size: number = 0;
         private head?: StatcNode;
+
+        constructor(private capacity: number){}
+
         get size(){
             return this._size;
         }
 
         push(value: string): void {
+            if(this.size === this.capacity){
+                throw new Error('Stack is full!!');
+            }
             const node: StatcNode = {value, next: this.head};
             this.head = node;
             this._size++;
@@ -35,10 +41,12 @@
 
     }
 
-    const ss = new SingleStack();
+    const ss = new SingleStack(3);
     ss.push('A 1');
     ss.push('B 2');
     ss.push('C 3');
+
+    console.log(ss)
 
     while(ss.size !== 0 ){
         console.log(ss.pop());
