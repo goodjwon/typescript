@@ -4,7 +4,7 @@
 
 const position = {x: 0, y: 0};
 
-type Direction = 'up' | 'down' | 'left' | 'right' ;
+type Direction = 'up' | 'down' | 'left' | 'right'  ;
 
 function move(direction:Direction) {
     switch(direction){
@@ -21,7 +21,8 @@ function move(direction:Direction) {
             position.x += 1;
             break;
         default:
-            throw Error(`unknow direction: ${direction}`)
+            const invalid: never = direction;   // compile time 에 에러확인 가능.
+            throw Error(`unknown direction: ${invalid}`)
     }
 }
 
