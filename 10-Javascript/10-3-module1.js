@@ -1,7 +1,7 @@
-export default function add (a, b) {
+export function add(a, b){
     return a + b;
 }
 
-export function printer(){
-    console.log('i am print');
+export function print(){
+    console.log('printing~!!!');
 }
